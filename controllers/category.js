@@ -48,8 +48,21 @@ module.exports.create = async function (req, res) {
 }
 
 module.exports.update = async function (req, res) {
-    try {
+    const update = {
+        name: req.body.name
+    }
+    
+    if(req.file){
+        updated.imageSrc = req.file.path
+    }
 
+    try {
+        const category = await Category.findOneAndUpdate(
+            { _id: req.params.id},
+            { $set: updated} ,
+            { new: true }
+        )
+        res.status(200).json(category)
     } catch (e) {
         errorHandler(res, e);
     }
