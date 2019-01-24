@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const contoller = require('../controllers/position');
 const router = express.Router();
 
